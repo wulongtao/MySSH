@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!--配置action对象-->
+	<bean id="userAction" class="com.xiaoxiaohei.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+
+	<bean id="userService" class="com.xiaoxiaohei.service.UserService">
+		<property name="userDao" ref="userDaoImpl"></property>
+	</bean>
+
+	<bean id="userDaoImpl" class="com.xiaoxiaohei.dao.UserDaoImpl" parent="baseDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<bean id="baseDao" class="com.xiaoxiaohei.dao.BaseDao"></bean>
+
+
+</beans>

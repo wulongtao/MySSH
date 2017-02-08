@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--配置数据库方言，hibernate可以针对特殊的数据库进行优化-->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!--是否把hibernate运行时的sql语句输出到控制台-->
+        <property name="show_sql">true</property>
+        <!--sql语句输出之后是否进行排版-->
+        <property name="format_sql">true</property>
+        <!--可以帮助由Java代码生成数据库脚本，进而生成具体的表结构：
+            主要有四个属性：
+            1.create——先删除原有表，再新建表后插入数据
+            2.update——在原有表的基础上插入数据
+            3.create-drop——先创建再删除
+            4.validate——对原来的表进行验证（如果现在的表结构和原有的表结构不同，那么就不会创建表）-->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!--配置current session-->
+        <!--与spring整合必须去掉这个，否则Spring Hibernate integration throws getFlushMode is not valid without active transaction-->
+        <!--<property name="hibernate.current_session_context_class">thread</property>-->
+
+        <mapping resource="com/xiaoxiaohei/entity/User.hbm.xml"></mapping>
+
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
